@@ -1,5 +1,8 @@
 package com.boeani.bloggingAPI.dto.request;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
 /**
@@ -9,25 +12,55 @@ import java.util.List;
  * when a new post is submitted.
  * </p>
  */
+@Setter
+@Getter
 public class CreatePostRequest {
 
     /**
      * Title of the post to be created.
+     * -- GETTER --
+     *  Returns the title of the post.
+     * <p>
+     *
+     * -- SETTER --
+     *  Sets the title of the post.
+     *
      */
     private String title;
 
     /**
      * Main body content of the post.
+     * -- GETTER --
+     *  Returns the main content of the post.
+     * <p>
+     *
+     * -- SETTER --
+     *  Sets the main content of the post.
+     *
      */
     private String content;
 
     /**
      * Category assigned to the post.
+     * -- GETTER --
+     *  Returns the category of the post.
+     * <p>
+     *
+     * -- SETTER --
+     *  Sets the category of the post.
+     *
      */
     private String category;
 
     /**
      * Optional tags used for classification and search.
+     * -- GETTER --
+     *  Returns the tags associated with the post.
+     * <p>
+     *
+     * -- SETTER --
+     *  Sets the tags associated with the post.
+     *
      */
     private List<String> tags;
 
@@ -56,75 +89,4 @@ public class CreatePostRequest {
     public CreatePostRequest() {
     }
 
-    /**
-     * Returns the title of the post.
-     *
-     * @return the post title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title of the post.
-     *
-     * @param title title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * Returns the main content of the post.
-     *
-     * @return the post content
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * Sets the main content of the post.
-     *
-     * @param content content to set
-     */
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    /**
-     * Returns the category of the post.
-     *
-     * @return the post category
-     */
-    public String getCategory() {
-        return category;
-    }
-
-    /**
-     * Sets the category of the post.
-     *
-     * @param category category to set
-     */
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    /**
-     * Returns the tags associated with the post.
-     *
-     * @return list of post tags
-     */
-    public List<String> getTags() {
-        return tags;
-    }
-
-    /**
-     * Sets the tags associated with the post.
-     *
-     * @param tags list of tags to set
-     */
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
 }
