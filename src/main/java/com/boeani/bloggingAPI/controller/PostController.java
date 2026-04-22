@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller that exposes HTTP endpoints for working with {@link Post} resources.
- * <p>
- * Delegates incoming API requests to {@link PostService} in order to retrieve
- * existing posts and create new ones.
- * </p>
+ * REST controller for create-post operations.
  */
 @RestController
 public class PostController {
@@ -36,7 +32,7 @@ public class PostController {
      * has been successfully persisted.
      * </p>
      *
-     * @param createPostRequest request body containing the data for the new post
+     * @param createPostRequest request payload containing the new post data
      * @return the newly created and persisted post
      */
     @PostMapping("/posts")
