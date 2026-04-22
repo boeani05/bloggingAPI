@@ -3,10 +3,12 @@ package com.boeani.bloggingAPI.controller;
 import com.boeani.bloggingAPI.dto.request.CreatePostRequest;
 import com.boeani.bloggingAPI.entity.Post;
 import com.boeani.bloggingAPI.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * REST controller that exposes HTTP endpoints for working with {@link Post} resources.
@@ -23,23 +25,8 @@ public class PostController {
      */
     private final PostService postService;
 
-    /**
-     * Creates a new controller instance with the required service dependency.
-     *
-     * @param postService service used to handle post API requests
-     */
     public PostController(PostService postService) {
         this.postService = postService;
-    }
-
-    /**
-     * Retrieves all blog posts currently available in the system.
-     *
-     * @return a list of all persisted posts
-     */
-    @GetMapping("/posts")
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
     }
 
     /**
@@ -55,7 +42,7 @@ public class PostController {
     @PostMapping("/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(
-            @RequestBody CreatePostRequest createPostRequest
+            @Valid @RequestBody CreatePostRequest createPostRequest
     ) {
         return postService.createPost(createPostRequest);
     }
