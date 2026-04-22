@@ -7,11 +7,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Map;
 
-// Handles all Exceptions, that might be thrown throughout the program
+/**
+ * Centralized exception mapping for REST endpoints.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handles exception, when title is not entered on call
+    /**
+     * Maps missing-title errors to HTTP 400.
+     *
+     * @param exception thrown validation/business exception
+     * @return standardized error response
+     */
     @ExceptionHandler(TitleNotEnteredException.class)
     public ResponseEntity<Map<String, Object>> handleMissingTitle(TitleNotEnteredException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
@@ -20,6 +27,12 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    /**
+     * Maps missing-content errors to HTTP 400.
+     *
+     * @param exception thrown validation/business exception
+     * @return standardized error response
+     */
     @ExceptionHandler(ContentNotEnteredException.class)
     public ResponseEntity<Map<String, Object>> handleMissingContent(ContentNotEnteredException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
@@ -28,6 +41,12 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    /**
+     * Maps missing-category errors to HTTP 400.
+     *
+     * @param exception thrown validation/business exception
+     * @return standardized error response
+     */
     @ExceptionHandler(CategoryNotEnteredException.class)
     public ResponseEntity<Map<String, Object>> handleMissingCategory(CategoryNotEnteredException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
@@ -36,6 +55,12 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    /**
+     * Maps missing-tags errors to HTTP 400.
+     *
+     * @param exception thrown validation/business exception
+     * @return standardized error response
+     */
     @ExceptionHandler(TagsNotEnteredException.class)
     public ResponseEntity<Map<String, Object>> handleMissingTags(TagsNotEnteredException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
@@ -44,6 +69,12 @@ public class GlobalExceptionHandler {
         ));
     }
 
+    /**
+     * Maps post-not-found errors to HTTP 404.
+     *
+     * @param exception thrown not-found exception
+     * @return standardized error response
+     */
     @ExceptionHandler(PostNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handlePostNotFound(PostNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
