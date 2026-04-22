@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST controller that exposes HTTP endpoints for working with {@link Post} resources.
- * <p>
- * Delegates incoming API requests to {@link PostService} in order to retrieve
- * existing posts and create new ones.
- * </p>
+ * REST controller for read-only post endpoints.
  */
 @RestController
 public class GetController {
@@ -45,6 +41,12 @@ public class GetController {
         return postService.getAllPosts();
     }
 
+    /**
+     * Retrieves one post by id.
+     *
+     * @param id identifier of the requested post
+     * @return the post matching the provided id
+     */
     @GetMapping("/posts/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Post getPostById(
