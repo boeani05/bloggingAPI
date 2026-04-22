@@ -1,15 +1,17 @@
 package com.boeani.bloggingAPI;
 
-import com.boeani.bloggingAPI.controller.PostController;
-import com.boeani.bloggingAPI.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+/**
+ * Smoke tests for application startup.
+ */
 @SpringBootTest
 class BloggingApiApplicationTests {
 
+    /**
+     * Verifies that the Spring application context loads successfully.
+     */
     @Test
     void contextLoads() {
     }
