@@ -1,5 +1,6 @@
 package com.boeani.bloggingAPI.dto.request;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,49 +20,53 @@ public class CreatePostRequest {
     /**
      * Title of the post to be created.
      * -- GETTER --
-     *  Returns the title of the post.
+     * Returns the title of the post.
      * <p>
-     *
+     * <p>
      * -- SETTER --
-     *  Sets the title of the post.
+     * Sets the title of the post.
      *
      */
+    @NotEmpty
     private String title;
 
     /**
      * Main body content of the post.
      * -- GETTER --
-     *  Returns the main content of the post.
+     * Returns the main content of the post.
      * <p>
-     *
+     * <p>
      * -- SETTER --
-     *  Sets the main content of the post.
+     * Sets the main content of the post.
      *
      */
+    @NotEmpty
     private String content;
 
     /**
      * Category assigned to the post.
      * -- GETTER --
-     *  Returns the category of the post.
+     * Returns the category of the post.
      * <p>
-     *
+     * <p>
      * -- SETTER --
-     *  Sets the category of the post.
+     * Sets the category of the post.
      *
      */
+    @NotEmpty
     private String category;
 
     /**
      * Optional tags used for classification and search.
      * -- GETTER --
-     *  Returns the tags associated with the post.
+     * Returns the tags associated with the post.
      * <p>
-     *
+     * <p>
      * -- SETTER --
-     *  Sets the tags associated with the post.
+     * Sets the tags associated with the post.
      *
      */
+    @NotEmpty
     private List<String> tags;
 
     /**
