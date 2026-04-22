@@ -7,75 +7,43 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * Data transfer object used to create a new blog post.
- * <p>
- * Carries the user-provided input from the API layer to the service layer
- * when a new post is submitted.
- * </p>
+ * Request payload used to create or update a post.
  */
 @Setter
 @Getter
 public class CreatePostRequest {
 
     /**
-     * Title of the post to be created.
-     * -- GETTER --
-     * Returns the title of the post.
-     * <p>
-     * <p>
-     * -- SETTER --
-     * Sets the title of the post.
-     *
+     * Title text of the post.
      */
     @NotEmpty
     private String title;
 
     /**
-     * Main body content of the post.
-     * -- GETTER --
-     * Returns the main content of the post.
-     * <p>
-     * <p>
-     * -- SETTER --
-     * Sets the main content of the post.
-     *
+     * Main post content.
      */
     @NotEmpty
     private String content;
 
     /**
-     * Category assigned to the post.
-     * -- GETTER --
-     * Returns the category of the post.
-     * <p>
-     * <p>
-     * -- SETTER --
-     * Sets the category of the post.
-     *
+     * Category label for grouping posts.
      */
     @NotEmpty
     private String category;
 
     /**
-     * Optional tags used for classification and search.
-     * -- GETTER --
-     * Returns the tags associated with the post.
-     * <p>
-     * <p>
-     * -- SETTER --
-     * Sets the tags associated with the post.
-     *
+     * Tags used for filtering and search.
      */
     @NotEmpty
     private List<String> tags;
 
     /**
-     * Creates a new request object containing all required post data.
+     * Creates a new request object with all required post fields.
      *
-     * @param title    title of the post
-     * @param content  content/body of the post
+     * @param title title of the post
+     * @param content content of the post
      * @param category category of the post
-     * @param tags     list of tags associated with the post
+     * @param tags tags associated with the post
      */
     public CreatePostRequest(String title, String content, String category, List<String> tags) {
         this.title = title;
@@ -85,11 +53,7 @@ public class CreatePostRequest {
     }
 
     /**
-     * Creates an empty request object.
-     * <p>
-     * Required by serialization/deserialization frameworks (e.g. Jackson)
-     * when mapping incoming JSON payloads.
-     * </p>
+     * No-args constructor required by Jackson.
      */
     public CreatePostRequest() {
     }
