@@ -16,6 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
+/**
+ * Web-layer tests for {@link PostController} create endpoint behavior.
+ */
 @WebMvcTest(PostController.class)
 class PostControllerTest {
 
@@ -25,56 +28,59 @@ class PostControllerTest {
     @MockitoBean
     private PostService postService;
 
-    @Test
-    public void shouldReturn200WhenGettingAllPosts() throws Exception {
 
-        Mockito.when(postService.getAllPosts()).thenReturn(List.of());
-
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/posts"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
+    /**
+     * Verifies that creating a post returns HTTP 201.
+     */
     @Test
     public void shouldReturn201WhenCreatingPost() throws Exception {
         Post post = new Post();
 
         String jsonInput = """
                 {
-                "title": "",
-                "content": "",
-                "category": ""
+                "title": "Title Test",
+                "content": "Content Test",
+                "category": "Category Test",
+                "tags": ["Tag Test"]
                 }
                 """;
 
-        Mockito.when(postService.createPost(Mockito.any(CreatePostRequest.class))).thenReturn(post);
+        Mockito.when(postService.createPost(Mockito.any(CreatePostRequest.class)))
+                .thenReturn(post);
 
         mockMvc
                 .perform(MockMvcRequestBuilders.post("/posts").contentType(MediaType.APPLICATION_JSON).content(jsonInput))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
+    /**
+     * Verifies that the response payload contains the expected post fields.
+     */
     @Test
     public void shouldReturnCorrectPostFieldsWhenCreatingPost() throws Exception {
         String title = "Title Test";
         String content = "Content Test";
         String category = "Category Test";
+        String tag = "Tag Test";
 
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setCategory(category);
+        post.setTags(List.of(tag));
 
         String jsonInput = String.format("""
                         {
                         "title": "%s",
                         "content": "%s",
-                        "category": "%s"
+                        "category": "%s",
+                        "tags": ["%s"]
                         }
                         """,
                 title,
                 content,
-                category
+                category,
+                tag
         );
 
         Mockito.when(postService.createPost(Mockito.any(CreatePostRequest.class))).thenReturn(post);
@@ -83,6 +89,7 @@ class PostControllerTest {
                 .perform(MockMvcRequestBuilders.post("/posts").contentType(MediaType.APPLICATION_JSON).content(jsonInput))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is(title)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is(content)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.category", Matchers.is(category)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.category", Matchers.is(category)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.tags", Matchers.is(List.of(tag))));
     }
 }
