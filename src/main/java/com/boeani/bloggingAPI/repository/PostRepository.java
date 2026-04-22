@@ -4,10 +4,9 @@ import com.boeani.bloggingAPI.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Repository interface for managing {@link Post} entities.
+ * Persistence interface for {@link Post} entities.
  * <p>
- * Extends {@link JpaRepository} to provide standard CRUD operations,
- * pagination, and sorting support for blog posts.
+ * Inherits CRUD, paging, and sorting operations from {@link JpaRepository}.
  * </p>
  */
 public interface PostRepository extends JpaRepository<Post, Long> {
