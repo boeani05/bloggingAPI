@@ -1,11 +1,13 @@
 package com.boeani.bloggingAPI.controller;
 
+import com.boeani.bloggingAPI.exceptions.GlobalExceptionHandler;
 import com.boeani.bloggingAPI.exceptions.PostNotFoundException;
 import com.boeani.bloggingAPI.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,13 +17,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * Web-layer tests for {@link DeleteController} endpoints.
  */
 @WebMvcTest(DeleteController.class)
+@Import(GlobalExceptionHandler.class)
 class DeleteControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @MockitoBean
-    PostService postService;
+    private PostService postService;
 
     /**
      * Verifies that deleting an existing post returns HTTP 204.
