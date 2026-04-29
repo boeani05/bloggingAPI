@@ -30,7 +30,7 @@ public class PutController {
     /**
      * Updates a post by id.
      *
-     * @param id identifier of the post to update
+     * @param id                identifier of the post to update
      * @param createPostRequest request payload with updated values
      * @return the updated post
      */
