@@ -34,4 +34,3 @@ build/
 .mvn/wrapper/maven-wrapper.properties
 src/main/resources/application.properties
 
-pom.xml
