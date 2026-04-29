@@ -55,6 +55,26 @@ public class PostService {
     }
 
     /**
+     * Searches posts by a free-text term across title, content, and category.
+     *
+     * @param term case-insensitive search term
+     * @return matching posts, or an empty list when the term is null/blank
+     */
+    public List<Post> getPostByTerm(String term) {
+        if (isTermBlankOrNull(term)) {
+            return List.of();
+        }
+
+        String normalizedTerm = term.trim();
+        return postRepository
+                .findDistinctByTitleContainingIgnoreCaseOrContentContainingIgnoreCaseOrCategoryContainingIgnoreCase(
+                        normalizedTerm,
+                        normalizedTerm,
+                        normalizedTerm
+                );
+    }
+
+    /**
      * Creates a new {@link Post} instance from the incoming request payload.
      * <p>
      * Copies all user-provided fields and initializes creation/update timestamps
@@ -85,7 +105,7 @@ public class PostService {
     /**
      * Updates an existing post identified by its id.
      *
-     * @param id identifier of the post to update
+     * @param id                identifier of the post to update
      * @param createPostRequest request payload containing updated values
      * @return the persisted post after update
      * @throws PostNotFoundException when no post exists for the given id
@@ -139,5 +159,9 @@ public class PostService {
         if (createPostRequest.getTags() == null || createPostRequest.getTags().isEmpty()) {
             throw new TagsNotEnteredException("Tags Are Missing");
         }
+    }
+
+    private boolean isTermBlankOrNull(String term) {
+        return (term == null || term.isBlank());
     }
 }
