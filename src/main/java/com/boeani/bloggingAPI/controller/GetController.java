@@ -5,6 +5,7 @@ import com.boeani.bloggingAPI.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,5 +54,23 @@ public class GetController {
             @PathVariable Long id
     ) {
         return postService.getPostById(id);
+    }
+
+    /**
+     * Searches posts by a term across supported text fields.
+     * <p>
+     * The term is passed as a request query parameter and used for
+     * case-insensitive matching in the service layer.
+     * </p>
+     *
+     * @param term search text used to filter posts
+     * @return a list of posts that match the provided term
+     */
+    @GetMapping(value = "/posts", params = "term")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Post> getPostsByTerm(
+            @RequestParam String term
+    ) {
+        return postService.getPostByTerm(term);
     }
 }
